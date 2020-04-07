@@ -11,17 +11,13 @@ public class StatsService {
     }
 
     public long calculateAverageSum(long[] purchases) {
-        long sum = 0;
-        for (long purchase : purchases) {
-            // аналог sum = sum + purchase;
-            sum += purchase;
-        }
+        long sum = calculateSum(purchases);
         return (sum / purchases.length);
     }
 
     public long findMax(long[] purchases) {
         long currentMax = purchases[0];
-        int month_number = 1;
+        long month_number = 1;
         int i = 1;
         for (long purchase : purchases) {
               if (currentMax < purchase) {
@@ -36,7 +32,7 @@ public class StatsService {
 
     public long findMin(long[] purchases) {
         long currentMin = purchases[0];
-        int month_number = 1;
+        long month_number = 1;
         int i = 1;
         for (long purchase : purchases) {
             if (currentMin > purchase){
@@ -50,7 +46,7 @@ public class StatsService {
 
     public long calculateQuantityMonthLessAvarage(long[] purchases) {
         long averageSum = calculateAverageSum(purchases);
-        int quantity = 0;
+        long quantity = 0;
         for (long purchase : purchases) {
             if (averageSum > purchase) {
                 quantity += 1;
@@ -60,15 +56,21 @@ public class StatsService {
         return quantity;
     }
 
-        public long calculateQuantityMonthMoreAvarage ( long[] purchases){
-            long averageSum = calculateAverageSum(purchases);
-            int quantity = 0;
-            for (long purchase : purchases) {
-                if (averageSum < purchase) {
-                    quantity += 1;
-                }
-
+    public long calculateQuantityMonthEqualAvarage(long[] purchases) {
+        long averageSum = calculateAverageSum(purchases);
+        long quantity = 0;
+        for (long purchase : purchases) {
+            if (averageSum == purchase) {
+                quantity += 1;
             }
+
+        }
+        return quantity;
+    }
+
+
+    public long calculateQuantityMonthMoreAvarage ( long[] purchases){
+            long quantity = purchases.length - calculateQuantityMonthLessAvarage(purchases)-calculateQuantityMonthEqualAvarage(purchases);
             return quantity;
 
         }
