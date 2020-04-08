@@ -56,22 +56,18 @@ public class StatsService {
         return quantity;
     }
 
-    public long calculateQuantityMonthEqualAvarage(long[] purchases) {
+
+
+    public long calculateQuantityMonthMoreAvarage ( long[] purchases){
         long averageSum = calculateAverageSum(purchases);
         long quantity = 0;
         for (long purchase : purchases) {
-            if (averageSum == purchase) {
+            if (averageSum < purchase) {
                 quantity += 1;
             }
 
         }
         return quantity;
-    }
-
-
-    public long calculateQuantityMonthMoreAvarage ( long[] purchases){
-            long quantity = purchases.length - calculateQuantityMonthLessAvarage(purchases)-calculateQuantityMonthEqualAvarage(purchases);
-            return quantity;
 
         }
     }
